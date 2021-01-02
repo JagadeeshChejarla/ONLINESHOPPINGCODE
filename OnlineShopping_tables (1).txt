@@ -1,0 +1,118 @@
+﻿
+drop table order_details;
+drop table orders_table;
+drop table payment;
+drop table wishlist;
+drop table cart;
+drop table customer;
+drop table product;
+drop table retailer;
+drop table admin;
+
+create table Admin(
+admin_id number primary key,
+admin_email varchar2(20),
+admin_name varchar2(20),
+admin_password varchar2 (20),
+admin_mobile varchar2 (20)
+);
+
+
+create table Retailer(
+retailer_id number primary key,
+retailer_name varchar2(20),
+retailer_email varchar2(20),
+retailer_mobile varchar2(20),
+retailer_password varchar2(20),
+retailer_address varchar2 (60),
+admin_id int,
+constraint fk_adminintoretailer foreign key(admin_id) references admin(admin_id)
+);
+
+
+create table Product(
+pro_id number primary key,
+pro_brand varchar2(20),
+pro_category varchar2(20),
+pro_name varchar2(20),
+pro_description varchar2(255),
+pro_price number,
+pro_quantity number,
+pro_sub_category varchar2(20),
+pro_img1  varchar2(255),
+pro_img2  varchar2(255),
+pro_img3  varchar2(255),
+retailer_id number,
+constraint fk_retailerintoproducts foreign key(retailer_id) references retailer(retailer_id)
+);
+
+
+
+create table customer(
+user_id number primary key,
+user_name varchar2(20),
+user_email varchar2(20),
+user_password varchar2(20),
+user_mobile varchar2(20),
+user_gender varchar2(1),
+user_address varchar2(255)
+);
+
+
+
+
+create table Cart(
+cart_id int primary key,
+cart_quantity int,
+pro_id int,
+user_id int,
+constraint fk_productintocart foreign key(pro_id) references product(pro_id),
+constraint fk_userintocart foreign key(user_id) references customer(user_id)
+);
+
+
+create table WishList(
+wishlist_id number primary key,
+pro_id number,
+user_id number,
+constraint fk_productintowishlist foreign key(pro_id) references product(pro_id),
+constraint fk_userintowishlist foreign key(user_id) references customer(user_id)
+);
+
+
+
+create table Payment(
+payment_id number primary key,
+payment_type varchar2(20),
+payment_amount number,
+user_id number,
+constraint fk_userintopaymenttable foreign key(user_id) references customer(user_id)
+);
+
+
+
+create table Orders_Table(
+order_id number primary key,
+payment_id number,
+user_id number,
+constraint fk_paymentintoordertable foreign key(payment_id) references payment(payment_id),
+constraint fk_userintoordertable foreign key(user_id) references customer(user_id)
+);
+
+
+create table Order_details(
+orderdetails_id number primary key,
+order_delivery_date date ,
+order_price number,
+order_purchase_date date ,
+order_quantity number,
+order_id number,
+pro_id number,
+user_id number,
+constraint fk_productintoorderdetails foreign key(pro_id) references product(pro_id),
+constraint fk_ordertableintoorderdetails foreign key(order_id) references orders_table(order_id),
+constraint fk_userintoorderdetails foreign key(user_id) references customer(user_id)
+);
+
+commit;
+

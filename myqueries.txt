@@ -1,0 +1,21 @@
+insert into retailer values (201,'retailer1','rt@gmail.com','987678','hdbsjjs','vijayawada',1);
+
+insert into product values(301,'AA','Electronics','Samsung','quality',25000,4,'Mobiles','j1','j2','j3',3);
+insert into product values(302,'AA','Electronics','Oppo','quality',25000,4,'Mobiles','k1','k2','k3',3);
+insert into product values(303,'AA','Electronics','quality','moto',25000,4,'Mobiles','l1','l2','l3',3);
+
+insert into customer values(401,'jagadeesh','j@gmail.com','90kjfghd','998999898','M','Kakinada');
+
+insert into customer values(402,'jayanth','j@gmail.com','90kjfghd','998999898','M','Kakinada');
+
+insert into customer values(403,'ramu','j@gmail.com','90kjfghd','998999898','M','Kakinada');
+
+insert into cart values(501,2,301,5);
+insert into cart values(502,2,302,5);
+insert into cart values(503,2,303,5);
+
+
+insert into wishlist values(601,301,5);
+insert into wishlist values(602,302,5);
+insert into wishlist values(603,303,5);
+
